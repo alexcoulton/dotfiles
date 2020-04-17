@@ -1,9 +1,12 @@
 syntax on
 colorscheme desert
+set noesckeys
 let mapleader = ','
 noremap <leader>q :q<cr>
 nnoremap <leader>s :w<cr>
 noremap <leader>t :NERDTree<cr>
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>e :tabedit 
 nnoremap gr :tabprevious<cr>
 " imap <Tab> <C-X><C-F><Left><Del>
 set number
@@ -25,6 +28,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-surround'
 Plug 'jalvesaq/Nvim-R'
 Plug 'preservim/nerdcommenter'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
 Plug 'gaalcaras/ncm-R'
 "Plug 'ycm-core/YouCompleteMe'
 Plug 'preservim/nerdtree'
