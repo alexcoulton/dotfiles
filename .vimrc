@@ -1,5 +1,5 @@
 syntax on
-colorscheme desert
+
 set noesckeys
 let mapleader = ','
 noremap <leader>q :q<cr>
@@ -7,6 +7,8 @@ nnoremap <leader>s :w<cr>
 noremap <leader>t :NERDTree<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>e :tabedit 
+vnoremap <S-j> /^#### <cr>
+vnoremap <S-k> ?^#### <cr>
 nnoremap gr :tabprevious<cr>
 " imap <Tab> <C-X><C-F><Left><Del>
 set number
@@ -33,9 +35,10 @@ Plug 'morhetz/gruvbox'
 Plug 'jpalardy/vim-slime'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ajutsushi/tagbar'
 Plug 'KKPMW/vim-sendtowindow'
 Plug 'itchyny/lightline.vim'
-Plug 'yegappan/taglist'
+"Plug 'yegappan/taglist'
 Plug 'rafi/awesome-vim-colorschemes'
 "Plug 'tmhedberg/SimpylFold'
 Plug 'Yggdroot/indentLine'
@@ -60,6 +63,8 @@ set timeoutlen=1000
 set ttimeoutlen=5
 set backspace=indent,eol,start
 
+nmap <S-h> :tabprevious<cr>
+nmap <S-l> :tabnext<cr>
 set ts=4 sw=4
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -68,6 +73,8 @@ map <C-l> <C-W>l
 
 colorscheme gruvbox
 
+nnoremap <F12> <C-]>
+nmap <F8> :TagbarToggle<CR>
 
 
 "nmap <leader>gd <Plug>(coc-definition)
@@ -90,3 +97,25 @@ nnoremap <C-p> :GFiles<CR>
 " 	e.g. :find settings.py
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
+
+
+let R_in_buffer = 0
+"set guifont=Consolas:h13
+"set gfn=Courier_New:h14:qNONANTIALIASED
+set gfn=Consolas:h13:qANTIALIASED
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+let g:tagbar_ctags_bin='C:\Program Files\ctags\ctags.exe'
+
+let g:tagbar_type_r = {
+    \ 'ctagstype' : 'r',
+    \ 'kinds'     : [
+        \ 's:Section',
+        \ 'f:Functions',
+        \ 'g:GlobalVariables',
+        \ 'v:FunctionVariables',
+    \ ]
+\ }
