@@ -1,14 +1,18 @@
 syntax on
-
+colorscheme desert
 set noesckeys
 let mapleader = ','
 noremap <leader>q :q<cr>
 nnoremap <leader>s :w<cr>
 noremap <leader>t :NERDTree<cr>
+nnoremap <leader>h :if exists("g:syntax_on") <Bar>              
+        \   syntax off <Bar>                             
+        \ else <Bar>                                     
+        \   syntax enable <Bar>                                  
+        \ endif <CR>
+
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>e :tabedit 
-vnoremap <S-j> /^#### <cr>
-vnoremap <S-k> ?^#### <cr>
 nnoremap gr :tabprevious<cr>
 " imap <Tab> <C-X><C-F><Left><Del>
 set number
@@ -16,10 +20,18 @@ set noerrorbells
 set incsearch
 set laststatus=2
 set nocompatible
+nnoremap <F12> <C-]> 
+
+"nnoremap <C-q> :tabnext<cr>
+nmap <S-h> :tabprevious<cr>
+nmap <S-l> :tabnext<cr>
+nnoremap <C-S-`> :tabprevious<cr>
+vmap <space> <Plug>RDSendSelection
+nmap <space> <S-v><space>
 
 "MOUSE SETTINGS
-set mouse=a
-set ttymouse=xterm2
+"set mouse=a
+"set ttymouse=xterm2
 "
 "set path=$PWD/*
 set path=/mnt/data/website/autoprimerpicker/*
@@ -32,10 +44,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'jpalardy/vim-slime'
 Plug 'maksimr/vim-jsbeautify'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ajutsushi/tagbar'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'KKPMW/vim-sendtowindow'
 Plug 'itchyny/lightline.vim'
 "Plug 'yegappan/taglist'
@@ -63,8 +76,6 @@ set timeoutlen=1000
 set ttimeoutlen=5
 set backspace=indent,eol,start
 
-nmap <S-h> :tabprevious<cr>
-nmap <S-l> :tabnext<cr>
 set ts=4 sw=4
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -73,8 +84,6 @@ map <C-l> <C-W>l
 
 colorscheme gruvbox
 
-nnoremap <F12> <C-]>
-nmap <F8> :TagbarToggle<CR>
 
 
 "nmap <leader>gd <Plug>(coc-definition)
@@ -99,16 +108,7 @@ let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
 
 
-let R_in_buffer = 0
-"set guifont=Consolas:h13
-"set gfn=Courier_New:h14:qNONANTIALIASED
-set gfn=Consolas:h13:qANTIALIASED
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
 
-let g:tagbar_ctags_bin='C:\Program Files\ctags\ctags.exe'
 
 let g:tagbar_type_r = {
     \ 'ctagstype' : 'r',
@@ -118,4 +118,30 @@ let g:tagbar_type_r = {
         \ 'g:GlobalVariables',
         \ 'v:FunctionVariables',
     \ ]
-\ }
+	\ }
+
+
+
+nmap <F8> :TagbarToggle<CR>
+let R_source = '~/.tmux_split.vim'
+
+
+"let g:lightline = {
+      "\ 'colorscheme': 'wombat',
+      "\ }
+
+
+"turn off nvimr replacement of _ with <-
+let R_assign = 0
+
+
+
+"select entire function
+map <leader>fu ?=.*function(<cr>V/{<cr>%
+
+
+"map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+
+vmap <leader>2 di'<esc>pi'<esc>
