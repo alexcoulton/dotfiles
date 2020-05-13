@@ -141,7 +141,17 @@ map <leader>fu ?=.*function(<cr>V/{<cr>%
 
 
 "map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-"map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+nmap <leader>vs :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 
 vmap <leader>2 di'<esc>pi'<esc>
+
+
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
+if executable(s:clip)
+   augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+    augroup END
+end
