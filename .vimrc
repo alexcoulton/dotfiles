@@ -25,14 +25,18 @@ nnoremap <F12> <C-]>
 "nnoremap <C-q> :tabnext<cr>
 nmap <S-h> :tabprevious<cr>
 nmap <S-l> :tabnext<cr>
-nnoremap <C-S-`> :tabprevious<cr>
-vmap <space> <Plug>RDSendSelection
-nmap <space> <S-v><space>
+"nnoremap <C-S-`> :tabprevious<cr>
+vmap <space> <C-c><C-c>
+nmap <space> <S-v><C-c><C-c>
+"nmap <space> <S-v><space>
 
 "MOUSE SETTINGS
-"set mouse=a
-"set ttymouse=xterm2
+set mouse=a
+set ttymouse=xterm2
 "
+"toggle mouse
+map <F5> <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
+
 "set path=$PWD/*
 set path=/mnt/data/website/autoprimerpicker/*
 
@@ -137,7 +141,7 @@ let R_assign = 0
 
 
 "select entire function
-map <leader>fu ?=.*function(<cr>V/{<cr>%
+map <leader>fu ?=.*function(<cr>V/{<cr>%<C-c><C-c>
 
 
 "map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -155,3 +159,11 @@ if executable(s:clip)
         autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
     augroup END
 end
+
+
+inoremap jj <ESC>
+
+
+"vim session commands 
+map <F2> :mksession! ~/vim_session <cr> " Quick write session with F2
+map <F3> :source ~/vim_session <cr>     " And load session with F3
