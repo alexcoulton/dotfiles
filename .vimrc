@@ -46,30 +46,43 @@ set noswapfile
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
+"Unused
+"Plug 'vim-airline/vim-airline'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'vim-pandoc/vim-rmarkdown'
-Plug 'jpalardy/vim-slime'
-Plug 'maksimr/vim-jsbeautify'
-Plug 'ajutsushi/tagbar'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'KKPMW/vim-sendtowindow'
-Plug 'itchyny/lightline.vim'
 "Plug 'yegappan/taglist'
-Plug 'rafi/awesome-vim-colorschemes'
 "Plug 'tmhedberg/SimpylFold'
+"Plug 'gaalcaras/ncm-R'
+"Plug 'ycm-core/YouCompleteMe'
+"Plug 'jiangmiao/auto-pairs'
+"Plug 'jalvesaq/zotcite'
+"Plug 'Shougo/unite.vim'
+"Plug 'rafaqz/citation.vim'
+"Plug 'maksimr/vim-jsbeautify'
+"Plug 'tpope/vim-surround'
+"Plug 'ivanov/vim-ipython'
+
+"Bugged!
+"Plug 'jalvesaq/Nvim-R'
+
+"Plug 'SirVer/ultisnips'
+Plug 'majutsushi/tagbar'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-surround'
-Plug 'jalvesaq/Nvim-R'
+
+Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
-Plug 'gaalcaras/ncm-R'
-"Plug 'ycm-core/YouCompleteMe'
-Plug 'preservim/nerdtree'
-Plug 'ivanov/vim-ipython'
-"Plug 'jiangmiao/auto-pairs'
+Plug 'morhetz/gruvbox'
+Plug 'jpalardy/vim-slime'
 call plug#end()
+
+nmap <C-S-a> :call NERDComment(0,"toggle")<CR>
+vnoremap <C-S-a> :call NERDComment(0,"toggle")<CR>
+
+
 
 let r_syntax_folding = 1
 "set nofoldenable
@@ -165,5 +178,56 @@ inoremap jj <ESC>
 
 
 "vim session commands 
-map <F2> :mksession! ~/vim_session <cr> " Quick write session with F2
-map <F3> :source ~/vim_session <cr>     " And load session with F3
+map <F2> :mksession! ~/vim_session " Quick write session with F2
+map <F3> :source ~/vim_session     " And load session with F3
+
+
+"let g:airline#extensions#wordcount#enabled = 1
+"let g:airline#extensions#wordcount#filetypes = '\vnotes|help|markdown|rst|org|text|asciidoc|tex|mail'
+
+
+
+"let g:citation_vim_bibtex_file="~/phd/rotation1scripts_v4/rmarkdown/references.bib"
+"let g:citation_vim_mode="bibtex"
+"let g:citation_vim_cache_path='~/.vim/bibcache'
+"let g:citation_vim_outer_prefix="["
+"let g:citation_vim_inner_prefix="@"
+"let g:citation_vim_suffix="]"
+"let g:citation_vim_et_al_limit=2
+
+
+""nmap <leader>u [unite]
+"nnoremap [unite] <nop>
+
+"nnoremap <silent>[unite]c       :<C-u>Unite -buffer-name=citation-start-insert -default-action=append      citation/key<cr>
+
+"function! ZoteroCite()
+"" pick a format based on the filetype (customize at will)
+   "let format = &filetype =~ '.*tex' ? 'citep' : 'pandoc'
+   "let api_call = 'http://127.0.0.1:23119/better-bibtex/cayw?format='.format.'&brackets=1'
+   "let ref = system('curl -s '.shellescape(api_call))
+   "return ref
+"endfunction
+
+"noremap <leader>z "=ZoteroCite()<CR>p
+"inoremap <C-z> <C-r>=ZoteroCite()<CR>
+"
+"
+set iskeyword+=@-@
+set dictionary+=~/phd/rotation1scripts_v4/rmarkdown/full_zotero_library_tags.bib
+"<C-x><C-k> to insert reference 
+imap <C-S-i> <C-x><C-k>
+
+"get word count for Rmarkdown documents 
+nmap <leader>wc :echom system('~/phd/rotation1scripts_v4/scripts/r/count_words.R' . ' ' . @%)<cr>
+
+"custom editor commands for r markdown boilerplate (figures and tables)
+:command -nargs=1 InsFig :normal! i fig.cap = paste0("**", fig("<args>"), "** ", "figure legend here")<esc>?figure legend here<cr>vwwwh
+
+:command -nargs=1 InsTab :normal! i caption = paste0("**", tab("<args>"), "** ", "table legend here")<esc>?table legend here<cr>vwwwh
+
+:command -nargs=1 RefFig :normal! i (figure `r fig("<args>", display = "num")`)
+
+:command -nargs=1 RefTab :normal! i (table `r tab("<args>", display = "num")`)
+
+
