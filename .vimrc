@@ -1,3 +1,5 @@
+set clipboard=
+set nocompatible
 syntax on
 colorscheme desert
 set noesckeys
@@ -19,7 +21,6 @@ set number
 set noerrorbells
 set incsearch
 set laststatus=2
-set nocompatible
 nnoremap <F12> <C-]> 
 
 "nnoremap <C-q> :tabnext<cr>
@@ -66,6 +67,10 @@ call plug#begin('~/.vim/plugged')
 "Plug 'jalvesaq/Nvim-R'
 
 "Plug 'SirVer/ultisnips'
+"Plug 'ycm-core/YouCompleteMe'
+"Plug 'gaalcaras/ncm-R'
+
+
 Plug 'majutsushi/tagbar'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
@@ -165,13 +170,13 @@ vmap <leader>2 di'<esc>pi'<esc>
 
 
 " WSL yank support
-let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
-if executable(s:clip)
-   augroup WSLYank
-        autocmd!
-        autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
-    augroup END
-end
+"let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
+"if executable(s:clip)
+   "augroup WSLYank
+        "autocmd!
+        "autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+    "augroup END
+"end
 
 
 inoremap jj <ESC>
@@ -181,42 +186,12 @@ inoremap jj <ESC>
 map <F2> :mksession! ~/vim_session " Quick write session with F2
 map <F3> :source ~/vim_session     " And load session with F3
 
-
-"let g:airline#extensions#wordcount#enabled = 1
-"let g:airline#extensions#wordcount#filetypes = '\vnotes|help|markdown|rst|org|text|asciidoc|tex|mail'
-
-
-
-"let g:citation_vim_bibtex_file="~/phd/rotation1scripts_v4/rmarkdown/references.bib"
-"let g:citation_vim_mode="bibtex"
-"let g:citation_vim_cache_path='~/.vim/bibcache'
-"let g:citation_vim_outer_prefix="["
-"let g:citation_vim_inner_prefix="@"
-"let g:citation_vim_suffix="]"
-"let g:citation_vim_et_al_limit=2
-
-
-""nmap <leader>u [unite]
-"nnoremap [unite] <nop>
-
-"nnoremap <silent>[unite]c       :<C-u>Unite -buffer-name=citation-start-insert -default-action=append      citation/key<cr>
-
-"function! ZoteroCite()
-"" pick a format based on the filetype (customize at will)
-   "let format = &filetype =~ '.*tex' ? 'citep' : 'pandoc'
-   "let api_call = 'http://127.0.0.1:23119/better-bibtex/cayw?format='.format.'&brackets=1'
-   "let ref = system('curl -s '.shellescape(api_call))
-   "return ref
-"endfunction
-
-"noremap <leader>z "=ZoteroCite()<CR>p
-"inoremap <C-z> <C-r>=ZoteroCite()<CR>
-"
-"
 set iskeyword+=@-@
 set dictionary+=~/phd/rotation1scripts_v4/rmarkdown/full_zotero_library_tags.bib
 "<C-x><C-k> to insert reference 
 imap <C-S-i> <C-x><C-k>
+"tab seems to be performing autocomplete and not tabbing... make a fix here:
+"imap <tab> <space><space><space><space>
 
 "get word count for Rmarkdown documents 
 nmap <leader>wc :echom system('~/phd/rotation1scripts_v4/scripts/r/count_words.R' . ' ' . @%)<cr>
@@ -229,5 +204,49 @@ nmap <leader>wc :echom system('~/phd/rotation1scripts_v4/scripts/r/count_words.R
 :command -nargs=1 RefFig :normal! i (figure `r fig("<args>", display = "num")`)
 
 :command -nargs=1 RefTab :normal! i (table `r tab("<args>", display = "num")`)
+
+:command InsChunk :normal! i```{r}<cr><cr>```<esc>
+
+
+:command -nargs=1 InsSection :normal! i#### <args> ####<esc>
+
+
+nmap <leader>rr :source ~/.vimrc<cr>
+"nmap <C-S-i> :InsChunk<cr>
+
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+
+
+"smart tab completion
+function! Smart_TabComplete()
+  let line = getline('.')                         " current line
+
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<space>\<space>\<space>\<space>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  let has_at = match(substr, '[@]') != -1       " position of slash, if any
+  if (has_at)
+	return "\<C-x>\<C-k>"
+  elseif (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+	return "\<C-X>\<C-O>"
+
+  endif
+endfunction
+
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+
+nmap <leader>vn :vsp ~/.vimnotes<cr>
+
 
 

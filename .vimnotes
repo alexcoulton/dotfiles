@@ -1,0 +1,36 @@
+#### Spelling_in_vim ####
+
+- Notes on spelling in Vim
+- turn spelling on :set spell
+- set spell language :set spelllang=en_gb
+- go to next misspelled word ]s; previous [s
+- add word to dictionary zg
+- correct a word z=
+
+#### Pasting ####
+
+Enter paste mode when pasting text into vim, this way vim will not try to
+alter the indentation:
+
+:set paste
+
+To turn off:
+
+:set paste!
+
+#### Omnicompletion ####
+https://vim.fandom.com/wiki/Omni_completion
+
+#### smart tab insertion ####
+this setting means that tab inserts literal tab characters (or four spaces)
+at the start of a string, but carries out omnicompletion in any other setting,
+i.e. after a keyword
+
+https://vim.fandom.com/wiki/Smart_mapping_for_tab_completion
+
+
+#### Dictionary_completion ####
+https://vim.fandom.com/wiki/Dictionary_completions
+
+#### 80-character line formatting ####
+:%!fmt -80 -s
