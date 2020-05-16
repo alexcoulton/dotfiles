@@ -169,7 +169,7 @@ let mapleader = ','
 "nnoremap <C-q> :tabnext<cr>
 imap <C-S-i> <C-x><C-k>
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
-inoremap jj <ESC>
+map jj <ESC>
 map <C-h> <C-W>h
 map <C-j> <C-W>j
 map <C-k> <C-W>k
