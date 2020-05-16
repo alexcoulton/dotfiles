@@ -3,13 +3,8 @@ set clipboard=
 set nocompatible
 syntax on
 colorscheme desert
-colorscheme gruvbox
-set noesckeys
-        \   syntax off <Bar>                             
-        \ else <Bar>                                     
-        \   syntax enable <Bar>                                  
-        \ endif <CR>
 
+set noesckeys
 set number
 set noerrorbells
 set incsearch
@@ -72,6 +67,11 @@ call plug#end()
 
 
 "#### Plugin settings ####
+
+colorscheme gruvbox
+
+
+
 
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
@@ -193,6 +193,10 @@ nnoremap <F12> <C-]>
 nnoremap <leader>e :tabedit 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>h :if exists("g:syntax_on") <Bar>              
+        \   syntax off <Bar>                             
+        \ else <Bar>                                     
+        \   syntax enable <Bar>                                  
+        \ endif <CR>
 nnoremap <leader>n :tabnew<CR>
 nnoremap <leader>s :w<cr>
 nnoremap gr :tabprevious<cr>
