@@ -33,3 +33,24 @@ https://vim.fandom.com/wiki/Dictionary_completions
 
 #### 80-character line formatting ####
 :%!fmt -80 -s
+
+
+#### Sorting text in vim ####
+Highlight text via visual selection
+:sort
+
+
+
+#### Keyboard shortcuts ####
+" open new terminal split:
+" 	:vert term
+" 
+" swap panes:
+" 	ctrl+w, ctrl+r
+"
+" change width of pane:
+" 	size, ctrl+w, |
+" 	e.g. 300 ctrl+w, |
+" open file in project path if you know the name but not the path:
+" 	:find filename
+" 	e.g. :find settings.py

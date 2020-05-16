@@ -1,50 +1,36 @@
+"#### General Settings ####
 set clipboard=
 set nocompatible
 syntax on
 colorscheme desert
+colorscheme gruvbox
 set noesckeys
-let mapleader = ','
-noremap <leader>q :q<cr>
-nnoremap <leader>s :w<cr>
-noremap <leader>t :NERDTree<cr>
-nnoremap <leader>h :if exists("g:syntax_on") <Bar>              
         \   syntax off <Bar>                             
         \ else <Bar>                                     
         \   syntax enable <Bar>                                  
         \ endif <CR>
 
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>e :tabedit 
-nnoremap gr :tabprevious<cr>
-" imap <Tab> <C-X><C-F><Left><Del>
 set number
 set noerrorbells
 set incsearch
 set laststatus=2
-nnoremap <F12> <C-]> 
+set noswapfile
+let r_syntax_folding = 1
 
-"nnoremap <C-q> :tabnext<cr>
-nmap <S-h> :tabprevious<cr>
-nmap <S-l> :tabnext<cr>
-"nnoremap <C-S-`> :tabprevious<cr>
-vmap <space> <C-c><C-c>
-nmap <space> <S-v><C-c><C-c>
-"nmap <space> <S-v><space>
+set undodir=~/.vim/undodir
+set undofile
+set timeoutlen=1000 
+set ttimeoutlen=5
+set backspace=indent,eol,start
 
-"MOUSE SETTINGS
+set ts=4 sw=4
+
+
+"#### MOUSE SETTINGS ####
 set mouse=a
 set ttymouse=xterm2
-"
-"toggle mouse
-map <F5> <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
 
-"set path=$PWD/*
-set path=/mnt/data/website/autoprimerpicker/*
-
-set noswapfile
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
+"#### Plugins ####
 call plug#begin('~/.vim/plugged')
 
 "Unused
@@ -84,53 +70,11 @@ Plug 'morhetz/gruvbox'
 Plug 'jpalardy/vim-slime'
 call plug#end()
 
-nmap <C-S-a> :call NERDComment(0,"toggle")<CR>
-vnoremap <C-S-a> :call NERDComment(0,"toggle")<CR>
 
+"#### Plugin settings ####
 
-
-let r_syntax_folding = 1
-"set nofoldenable
-
-set undodir=~/.vim/undodir
-set undofile
-set timeoutlen=1000 
-set ttimeoutlen=5
-set backspace=indent,eol,start
-
-set ts=4 sw=4
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-colorscheme gruvbox
-
-
-
-"nmap <leader>gd <Plug>(coc-definition)
-"nmap <leader>gr <Plug>(coc-references)
-nnoremap <leader>n :tabnew<CR>
-nnoremap <C-p> :GFiles<CR>
-
-" shortcuts:
-" open new terminal split:
-" 	:vert term
-" 
-" swap panes:
-" 	ctrl+w, ctrl+r
-"
-" change width of pane:
-" 	size, ctrl+w, |
-" 	e.g. 300 ctrl+w, |
-" open file in project path if you know the name but not the path:
-" 	:find filename
-" 	e.g. :find settings.py
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
-
-
-
 
 let g:tagbar_type_r = {
     \ 'ctagstype' : 'r',
@@ -142,35 +86,9 @@ let g:tagbar_type_r = {
     \ ]
 	\ }
 
-
-
-nmap <F8> :TagbarToggle<CR>
+"Nvim-R tmux support
 let R_source = '~/.tmux_split.vim'
 
-
-"let g:lightline = {
-      "\ 'colorscheme': 'wombat',
-      "\ }
-
-
-"turn off nvimr replacement of _ with <-
-let R_assign = 0
-
-
-
-"select entire function
-map <leader>fu ?=.*function(<cr>V/{<cr>%<C-c><C-c>
-
-
-"map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-nmap <leader>vs :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-
-
-vmap <leader>2 di'<esc>pi'<esc>
-
-
-" WSL yank support
-"let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
 "if executable(s:clip)
    "augroup WSLYank
         "autocmd!
@@ -179,22 +97,13 @@ vmap <leader>2 di'<esc>pi'<esc>
 "end
 
 
-inoremap jj <ESC>
-
-
-"vim session commands 
-map <F2> :mksession! ~/vim_session " Quick write session with F2
-map <F3> :source ~/vim_session     " And load session with F3
+"#### References ####
 
 set iskeyword+=@-@
 set dictionary+=~/phd/rotation1scripts_v4/rmarkdown/full_zotero_library_tags.bib
 "<C-x><C-k> to insert reference 
-imap <C-S-i> <C-x><C-k>
-"tab seems to be performing autocomplete and not tabbing... make a fix here:
-"imap <tab> <space><space><space><space>
 
-"get word count for Rmarkdown documents 
-nmap <leader>wc :echom system('~/phd/rotation1scripts_v4/scripts/r/count_words.R' . ' ' . @%)<cr>
+"#### Custom commands ####
 
 "custom editor commands for r markdown boilerplate (figures and tables)
 :command -nargs=1 InsFig :normal! i fig.cap = paste0("**", fig("<args>"), "** ", "figure legend here")<esc>?figure legend here<cr>vwwwh
@@ -207,19 +116,12 @@ nmap <leader>wc :echom system('~/phd/rotation1scripts_v4/scripts/r/count_words.R
 
 :command InsChunk :normal! i```{r}<cr><cr>```<esc>
 
-
 :command -nargs=1 InsSection :normal! i#### <args> ####<esc>
-
-
-nmap <leader>rr :source ~/.vimrc<cr>
-"nmap <C-S-i> :InsChunk<cr>
 
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
-
-
-"smart tab completion
+"#### Custom functions ####
 function! Smart_TabComplete()
   let line = getline('.')                         " current line
 
@@ -244,9 +146,58 @@ function! Smart_TabComplete()
   endif
 endfunction
 
+"#### Indentation ####
+
+"Produce proper indentation after e.g. and lapply with an anonymous function.
+"See :h ft-r-indent
+let r_indent_align_args = 0
+let r_indent_ess_comments = 0
+let r_indent_ess_compatible = 0
+
+"#### Key Mappings ####
+
+let mapleader = ','
+" imap <Tab> <C-X><C-F><Left><Del>
+"imap <tab> <space><space><space><space>
+"map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"nmap <C-S-i> :InsChunk<cr>
+"nmap <leader>gd <Plug>(coc-definition)
+"nmap <leader>gr <Plug>(coc-references)
+"nmap <space> <S-v><space>
+"nnoremap <C-S-`> :tabprevious<cr>
+"nnoremap <C-q> :tabnext<cr>
+imap <C-S-i> <C-x><C-k>
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+inoremap jj <ESC>
+map <C-h> <C-W>h
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-l> <C-W>l
+map <F2> :mksession! ~/vim_session " Quick write session with F2
+map <F3> :source ~/vim_session     " And load session with F3
+map <F5> <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
 
+"Select entire function
+map <leader>fu ?=.*function(<cr>V/{<cr>%<C-c><C-c> 
+nmap <C-S-a> :call NERDComment(0,"toggle")<CR>
+nmap <F8> :TagbarToggle<CR>
+nmap <S-h> :tabprevious<cr>
+nmap <S-l> :tabnext<cr>
+nmap <leader>rr :source ~/.vimrc<cr>
 nmap <leader>vn :vsp ~/.vimnotes<cr>
-
-
-
+nmap <leader>vs :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+nmap <leader>wc :echom system('~/phd/rotation1scripts_v4/scripts/r/count_words.R' . ' ' . @%)<cr>
+nmap <space> <S-v><C-c><C-c>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <F12> <C-]> 
+nnoremap <leader>e :tabedit 
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>h :if exists("g:syntax_on") <Bar>              
+nnoremap <leader>n :tabnew<CR>
+nnoremap <leader>s :w<cr>
+nnoremap gr :tabprevious<cr>
+noremap <leader>q :q<cr>
+noremap <leader>t :NERDTree<cr>
+vmap <leader>2 di'<esc>pi'<esc>
+vmap <space> <C-c><C-c>
+vnoremap <C-S-a> :call NERDComment(0,"toggle")<CR>
