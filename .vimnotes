@@ -1,3 +1,8 @@
+#### using e not w ####
+e goes to the end of the current word, w goes to the start
+of the next word. this is why my selections often go too far,
+I've been pressing w not e.
+
 #### vim surround ####
 I realised that I had been using this wrong and that's
 why it wasn't working properly before.
