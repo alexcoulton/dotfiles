@@ -41,7 +41,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'Shougo/unite.vim'
 "Plug 'rafaqz/citation.vim'
 "Plug 'maksimr/vim-jsbeautify'
-"Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 "Plug 'ivanov/vim-ipython'
 
 "Bugged!
@@ -51,6 +51,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'ycm-core/YouCompleteMe'
 "Plug 'gaalcaras/ncm-R'
 
+Plug '~/repos/vim_plugins/firstplugin'
 
 Plug 'majutsushi/tagbar'
 Plug 'Xuyuanp/nerdtree-git-plugin'
