@@ -1,3 +1,26 @@
+#### Omnicompletion vs any completion ####
+I've now realised that these are distinct things.
+Omnicompletion is accessed through Ctrl+x, Ctrl+o,
+whereas any completion is accessed through Ctrl+n. 
+
+Any completion resembles pressing tab in sublime - it uses
+keywords in the files you have open in any of the tabs
+to find a match. 
+
+Omni completion on the other hand tries to be smarter,
+analysing the context in which you are using autocompletion,
+for example whether you are inside of function that has yet to 
+be closed with a closing bracket. 
+
+Omni completion for R as implemented in the ncm-R plugin relies 
+on a number of packages, including having an active Nvim-R session
+open.
+
+This isn't great as I'm not using Nvim-R. An alternative is to 
+have a list of all R functions open in a buffer and to use any 
+completion.
+
+
 #### using e not w ####
 e goes to the end of the current word, w goes to the start
 of the next word. this is why my selections often go too far,

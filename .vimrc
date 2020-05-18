@@ -11,6 +11,8 @@ set incsearch
 set laststatus=2
 set noswapfile
 let r_syntax_folding = 1
+set showcmd
+
 
 set undodir=~/.vim/undodir
 set undofile
@@ -19,7 +21,7 @@ set ttimeoutlen=5
 set backspace=indent,eol,start
 
 set ts=4 sw=4
-
+set number relativenumber "turn on relative line numbering
 
 "#### MOUSE SETTINGS ####
 set mouse=a
@@ -142,7 +144,8 @@ function! Smart_TabComplete()
   elseif ( has_slash )
     return "\<C-X>\<C-F>"                         " file matching
   else
-	return "\<C-X>\<C-O>"
+	return "\<C-N>"                  "any completion
+	"return "\<C-X>\<C-O>" "Omnicompletion
 
   endif
 endfunction
