@@ -8,7 +8,7 @@ set number
 set noerrorbells
 set incsearch
 set laststatus=2
-set noswapfile
+"set noswapfile
 let r_syntax_folding = 1
 set showcmd
 
@@ -18,6 +18,8 @@ set undofile
 set timeoutlen=1000 
 set ttimeoutlen=5
 set backspace=indent,eol,start
+set re=1 "set vim to use an older regex engine. this makes it much faster
+"https://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
 
 set display+=lastline   "make vim show wrapped lines (don't hide with @)
 set linebreak "don't break words when wrapping text
@@ -77,11 +79,13 @@ call plug#end()
 "#### Colour Scheme ####
 
 colorscheme desert
-colorscheme gruvbox
 
 "light color settings:
 colorscheme summerfruit256
 highlight LineNr ctermfg=grey ctermbg=white
+
+colorscheme gruvbox
+set bg=dark
 
 "#### Plugin settings ####
 
