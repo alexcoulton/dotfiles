@@ -1,3 +1,10 @@
+#### tabs #####
+how to move a tab's postion:
+move to position i:
+:tabm i
+
+
+
 #### Omnicompletion vs any completion ####
 I've now realised that these are distinct things.
 Omnicompletion is accessed through Ctrl+x, Ctrl+o,

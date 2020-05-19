@@ -55,6 +55,7 @@ Plug 'tpope/vim-surround'
 
 Plug '~/repos/vim_plugins/firstplugin'
 
+Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
