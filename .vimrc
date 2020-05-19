@@ -2,7 +2,6 @@
 set clipboard=
 set nocompatible
 syntax on
-colorscheme desert
 
 set noesckeys
 set number
@@ -70,9 +69,14 @@ Plug 'jpalardy/vim-slime'
 call plug#end()
 
 
+"#### Colour Scheme ####
+
+colorscheme desert
+colorscheme gruvbox
+colorscheme summerfruit256
+
 "#### Plugin settings ####
 
-colorscheme gruvbox
 
 
 
