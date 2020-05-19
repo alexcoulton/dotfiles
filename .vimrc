@@ -19,6 +19,10 @@ set timeoutlen=1000
 set ttimeoutlen=5
 set backspace=indent,eol,start
 
+set display+=lastline   "make vim show wrapped lines (don't hide with @)
+set linebreak "don't break words when wrapping text
+set formatoptions+=a "automatically format paragraphs when typing (introduce line breaks)
+set tw=120 "text width set to 120
 set ts=4 sw=4
 set number relativenumber "turn on relative line numbering
 
@@ -53,6 +57,7 @@ Plug 'tpope/vim-surround'
 "Plug 'gaalcaras/ncm-R'
 
 Plug '~/repos/vim_plugins/firstplugin'
+Plug '~/.vim/plugged/line_spacing'
 
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
@@ -73,7 +78,10 @@ call plug#end()
 
 colorscheme desert
 colorscheme gruvbox
+
+"light color settings:
 colorscheme summerfruit256
+highlight LineNr ctermfg=grey ctermbg=white
 
 "#### Plugin settings ####
 
@@ -108,7 +116,7 @@ let R_source = '~/.tmux_split.vim'
 "#### References ####
 
 set iskeyword+=@-@
-set dictionary+=~/phd/rotation1scripts_v4/rmarkdown/full_zotero_library_tags.bib
+set dictionary+=~/project.phd.main/rotation1scripts_v4/rmarkdown/full_zotero_library_tags.bib
 "<C-x><C-k> to insert reference 
 
 "#### Custom commands ####
@@ -125,6 +133,11 @@ set dictionary+=~/phd/rotation1scripts_v4/rmarkdown/full_zotero_library_tags.bib
 :command InsChunk :normal! i```{r}<cr><cr>```<esc>
 
 :command -nargs=1 InsSection :normal! i#### <args> ####<esc>
+
+:command Td :colorscheme gruvbox | set bg=dark
+:command Tl :colorscheme summerfruit256
+
+
 
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
@@ -195,7 +208,7 @@ nmap <S-l> :tabnext<cr>
 nmap <leader>rr :source ~/.vimrc<cr>
 nmap <leader>vn :vsp ~/.vimnotes<cr>
 nmap <leader>vs :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-nmap <leader>wc :echom system('~/phd/rotation1scripts_v4/scripts/r/count_words.R' . ' ' . @%)<cr>
+nmap <leader>wc :echom system('~/project.phd.main/rotation1scripts_v4/scripts/r/count_words.R' . ' ' . @%)<cr>
 nmap <space> <S-v><C-c><C-c>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <F12> <C-]> 
@@ -214,3 +227,14 @@ noremap <leader>t :NERDTree<cr>
 vmap <leader>2 di'<esc>pi'<esc>
 vmap <space> <C-c><C-c>
 vnoremap <C-S-a> :call NERDComment(0,"toggle")<CR>
+
+
+"toggle numbering
+noremap <leader>5 :set invnumber invrelativenumber<CR>
+
+
+"latex mappings
+"nnoremap j gj
+"nnoremap gj j
+"nnoremap k gk
+"nnoremap gk k
