@@ -105,3 +105,11 @@ Highlight text via visual selection
 " open file in project path if you know the name but not the path:
 " 	:find filename
 " 	e.g. :find settings.py
+
+
+#### Syntax highlighting ####
+Vim can be slow when editing large files with syntax highlighting turned on. To toggle syntax
+highlighting, use the commands :syntax off / :syntax on
+
+#### Referencing ####
+In insert mode, type an @ symbol and press tab to bring up the references list

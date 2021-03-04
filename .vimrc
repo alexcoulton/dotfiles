@@ -12,6 +12,7 @@ set laststatus=2
 let r_syntax_folding = 1
 set showcmd
 
+set hidden "lets you make changes to a file and move to another buffer without saving the file"
 
 set undodir=~/.vim/undodir
 set undofile
@@ -22,11 +23,28 @@ set re=1 "set vim to use an older regex engine. this makes it much faster
 "https://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
 
 set display+=lastline   "make vim show wrapped lines (don't hide with @)
-set linebreak "don't break words when wrapping text
-set formatoptions+=a "automatically format paragraphs when typing (introduce line breaks)
-set tw=120 "text width set to 120
+
+
+"writing markdown settings
+"set linebreak "don't break words when wrapping text
+"set formatoptions+=a "automatically format paragraphs when typing (introduce line breaks)
+"set tw=120 "text width set to 120
+
+
+"writing code settings
+set formatoptions-=a "automatically format paragraphs when typing (introduce line breaks)
+set tw=1000 "text width set to 120
+
 set ts=4 sw=4
 set number relativenumber "turn on relative line numbering
+
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+
+"#### Spelling settings ####
+set spell 
+set spelllang=en_gb
+nmap <C-n> ]s
 
 "#### MOUSE SETTINGS ####
 set mouse=a
@@ -43,14 +61,15 @@ call plug#begin('~/.vim/plugged')
 "Plug 'tmhedberg/SimpylFold'
 "Plug 'gaalcaras/ncm-R'
 "Plug 'ycm-core/YouCompleteMe'
-"Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/goyo.vim'
 "Plug 'jalvesaq/zotcite'
 "Plug 'Shougo/unite.vim'
 "Plug 'rafaqz/citation.vim'
 "Plug 'maksimr/vim-jsbeautify'
 Plug 'tpope/vim-surround'
 "Plug 'ivanov/vim-ipython'
-
+Plug 'Asheq/close-buffers.vim'
 "Bugged!
 "Plug 'jalvesaq/Nvim-R'
 
@@ -90,7 +109,7 @@ set bg=dark
 "#### Plugin settings ####
 
 
-
+let g:goyo_width = 150 
 
 
 let g:slime_target = "tmux"
@@ -205,7 +224,7 @@ map <F5> <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
 
 "Select entire function
 map <leader>fu ?=.*function(<cr>V/{<cr>%<C-c><C-c> 
-nmap <C-S-a> :call NERDComment(0,"toggle")<CR>
+nmap <C-S> :call NERDComment(0,"toggle")<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <S-h> :tabprevious<cr>
 nmap <S-l> :tabnext<cr>
@@ -242,3 +261,9 @@ noremap <leader>5 :set invnumber invrelativenumber<CR>
 "nnoremap gj j
 "nnoremap k gk
 "nnoremap gk k
+
+nnoremap <PageUp> <C-U>
+nnoremap <PageDown> <C-D>
+
+
+set conceallevel=0
