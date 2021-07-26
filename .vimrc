@@ -2,6 +2,7 @@
 set clipboard=
 set nocompatible
 syntax on
+set nowrap
 
 set noesckeys
 set number
@@ -11,6 +12,7 @@ set laststatus=2
 "set noswapfile
 let r_syntax_folding = 1
 set showcmd
+set conceallevel=0
 
 set hidden "lets you make changes to a file and move to another buffer without saving the file"
 
@@ -42,13 +44,13 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 
 "#### Spelling settings ####
-set spell 
-set spelllang=en_gb
-nmap <C-n> ]s
+"set spell 
+"set spelllang=en_gb
+"nmap <C-n> ]s
 
 "#### MOUSE SETTINGS ####
-set mouse=a
-set ttymouse=xterm2
+"set mouse=a
+"set ttymouse=xterm2
 
 "#### Plugins ####
 call plug#begin('~/.vim/plugged')
@@ -58,10 +60,14 @@ call plug#begin('~/.vim/plugged')
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'vim-pandoc/vim-rmarkdown'
 "Plug 'yegappan/taglist'
+Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+Plug 'Raimondi/delimitMate'
 "Plug 'tmhedberg/SimpylFold'
 "Plug 'gaalcaras/ncm-R'
 "Plug 'ycm-core/YouCompleteMe'
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
+"Plug 'tmsvg/pear-tree'
+"Plug 'rstacruz/vim-closer'
 Plug 'junegunn/goyo.vim'
 "Plug 'jalvesaq/zotcite'
 "Plug 'Shougo/unite.vim'
@@ -100,8 +106,8 @@ call plug#end()
 colorscheme desert
 
 "light color settings:
-colorscheme summerfruit256
-highlight LineNr ctermfg=grey ctermbg=white
+"colorscheme summerfruit256
+"highlight LineNr ctermfg=grey ctermbg=white
 
 colorscheme gruvbox
 set bg=dark
@@ -155,10 +161,10 @@ set dictionary+=~/project.phd.main/rotation1scripts_v4/rmarkdown/full_zotero_lib
 
 :command InsChunk :normal! i```{r}<cr><cr>```<esc>
 
-:command -nargs=1 InsSection :normal! i#### <args> ####<esc>
+:command -nargs=1 IS :normal! i############################<enter>#<args> <enter>############################<esc>
 
 :command Td :colorscheme gruvbox | set bg=dark
-:command Tl :colorscheme summerfruit256
+":command Tl :colorscheme summerfruit256
 
 
 
@@ -223,7 +229,9 @@ map <F3> :source ~/vim_session     " And load session with F3
 map <F5> <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
 
 "Select entire function
-map <leader>fu ?=.*function(<cr>V/{<cr>%<C-c><C-c> 
+"map <leader>fu ?^[a-zA-Z0-9 .-_]*=.*function(<cr>V/{<cr>%<C-c><C-c> 
+map <leader>fu ?^[a-zA-Z]<enter>v/{<enter>%<space><C-o><C-o>15<C-e>
+map <leader>gf ?^[a-zA-Z]<enter>
 nmap <C-S> :call NERDComment(0,"toggle")<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <S-h> :tabprevious<cr>
@@ -264,6 +272,16 @@ noremap <leader>5 :set invnumber invrelativenumber<CR>
 
 nnoremap <PageUp> <C-U>
 nnoremap <PageDown> <C-D>
+nmap <leader>b yssbi
+
+"delimitMate options
+"let delimitMate_smart_matchpairs = ''
+"au FileType tcl let b:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
+
+"let delimitMate_balance_matchpairs = 1
+"au FileType tcl let b:delimitMate_balance_matchpairs = 1
+
+let delimitMate_expand_cr = 1
+au FileType mail let b:delimitMate_expand_cr = 1
 
 
-set conceallevel=0
