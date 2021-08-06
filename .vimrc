@@ -284,4 +284,19 @@ nmap <leader>b yssbi
 let delimitMate_expand_cr = 1
 au FileType mail let b:delimitMate_expand_cr = 1
 
-
+"Enable numpad
+imap <Esc>Oq 1
+imap <Esc>Or 2
+imap <Esc>Os 3
+imap <Esc>Ot 4
+imap <Esc>Ou 5
+imap <Esc>Ov 6
+imap <Esc>Ow 7
+imap <Esc>Ox 8
+imap <Esc>Oy 9
+imap <Esc>Op 0
+imap <Esc>On .
+imap <Esc>OR *
+imap <Esc>OQ /
+imap <Esc>Ol +
+imap <Esc>OS -
