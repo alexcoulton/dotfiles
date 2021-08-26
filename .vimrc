@@ -274,6 +274,12 @@ nnoremap <PageUp> <C-U>
 nnoremap <PageDown> <C-D>
 nmap <leader>b yssbi
 
+nnoremap <leader>k ?^\S<enter>
+nnoremap <leader>j /^\S<enter>
+
+vnoremap <leader>k ?^\S<enter>
+vnoremap <leader>j /^\S<enter>
+
 "delimitMate options
 "let delimitMate_smart_matchpairs = ''
 "au FileType tcl let b:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
