@@ -166,7 +166,8 @@ set dictionary+=~/project.phd.main/rotation1scripts_v4/rmarkdown/full_zotero_lib
 :command Td :colorscheme gruvbox | set bg=dark
 ":command Tl :colorscheme summerfruit256
 
-
+"custom Ag command
+:command -nargs=1 Agg :call fzf#vim#ag('<args>', {'dir': '~/work/ucl/scripts/'})
 
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
@@ -306,3 +307,7 @@ imap <Esc>OR *
 imap <Esc>OQ /
 imap <Esc>Ol +
 imap <Esc>OS -
+
+
+
+
