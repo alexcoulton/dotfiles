@@ -62,6 +62,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'yegappan/taglist'
 Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 Plug 'Raimondi/delimitMate'
+Plug 'easymotion/vim-easymotion'
 "Plug 'tmhedberg/SimpylFold'
 "Plug 'gaalcaras/ncm-R'
 "Plug 'ycm-core/YouCompleteMe'
@@ -198,6 +199,11 @@ function! Smart_TabComplete()
   endif
 endfunction
 
+function! Source_RScript()
+    let filepath = expand("%:p")"
+    execute "normal! isource('" . filepath . "')"
+endfunction
+
 "#### Indentation ####
 
 "Produce proper indentation after e.g. and lapply with an anonymous function.
@@ -231,7 +237,7 @@ map <F5> <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
 
 "Select entire function
 "map <leader>fu ?^[a-zA-Z0-9 .-_]*=.*function(<cr>V/{<cr>%<C-c><C-c> 
-map <leader>fu ?^[a-zA-Z]<enter>v/{<enter>%<space><C-o><C-o>15<C-e>
+map <leader>fu ?^[a-zA-Z]<enter>v/{<enter>%<space><C-o><C-o>
 map <leader>gf ?^[a-zA-Z]<enter>
 nmap <C-S> :call NERDComment(0,"toggle")<CR>
 nmap <F8> :TagbarToggle<CR>
@@ -242,7 +248,6 @@ nmap <leader>vn :vsp ~/.vimnotes<cr>
 nmap <leader>vs :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <leader>wc :echom system('~/project.phd.main/rotation1scripts_v4/scripts/r/count_words.R' . ' ' . @%)<cr>
 nmap <space> <S-v><C-c><C-c>
-nnoremap <C-p> :GFiles<CR>
 nnoremap <F12> <C-]> 
 nnoremap <leader>e :tabedit 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -259,6 +264,12 @@ noremap <leader>t :NERDTree<cr>
 vmap <leader>2 di'<esc>pi'<esc>
 vmap <space> <C-c><C-c>
 vnoremap <C-S-a> :call NERDComment(0,"toggle")<CR>
+"nnoremap <C-p> :GFiles<CR>
+
+"nnoremap <C-p> :call fzf#run({'source': 'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R"', 
+            "\ 'sink':  'edit'})
+
+nnoremap <C-p> :call fzf#run(fzf#wrap({ 'source': 'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R" -printf "%T@ %Tc %p\n" -o -name "*.sh" -type f -printf "%T@ %Tc %p\n" -o -name "*.py" -type f -printf "%T@ %Tc %p\n" \| sort -r', 'sink': 'e'}))<enter>
 
 
 "toggle numbering
@@ -274,12 +285,14 @@ noremap <leader>5 :set invnumber invrelativenumber<CR>
 nnoremap <PageUp> <C-U>
 nnoremap <PageDown> <C-D>
 nmap <leader>b yssbi
+nnoremap <leader>ff A %>% filter()<esc>ha
 
 nnoremap <leader>k ?^\S<enter>
 nnoremap <leader>j /^\S<enter>
 
 vnoremap <leader>k ?^\S<enter>
 vnoremap <leader>j /^\S<enter>
+
 
 "delimitMate options
 "let delimitMate_smart_matchpairs = ''
@@ -308,6 +321,12 @@ imap <Esc>OQ /
 imap <Esc>Ol +
 imap <Esc>OS -
 
+"quickfix list navigation
+map [q :cp<CR>
+map ]q :cn<CR>
 
 
+"plotting command
+"nnoremap <leader>p ipl(<enter><enter>, 12, 12, <C-R>=expand("%:t") <esc>
+nnoremap <leader>fn i<C-R>=expand("%:t")<esc>
 
