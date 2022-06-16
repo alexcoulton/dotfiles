@@ -57,26 +57,26 @@ call plug#begin('~/.vim/plugged')
 
 "Unused
 "Plug 'vim-airline/vim-airline'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'vim-pandoc/vim-rmarkdown'
 "Plug 'yegappan/taglist'
 Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 Plug 'Raimondi/delimitMate'
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 "Plug 'tmhedberg/SimpylFold'
 "Plug 'gaalcaras/ncm-R'
 "Plug 'ycm-core/YouCompleteMe'
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'tmsvg/pear-tree'
 "Plug 'rstacruz/vim-closer'
-Plug 'junegunn/goyo.vim'
+"Plug 'junegunn/goyo.vim'
 "Plug 'jalvesaq/zotcite'
 "Plug 'Shougo/unite.vim'
 "Plug 'rafaqz/citation.vim'
 "Plug 'maksimr/vim-jsbeautify'
 Plug 'tpope/vim-surround'
 "Plug 'ivanov/vim-ipython'
-Plug 'Asheq/close-buffers.vim'
+"Plug 'Asheq/close-buffers.vim'
 "Bugged!
 "Plug 'jalvesaq/Nvim-R'
 
@@ -84,13 +84,15 @@ Plug 'Asheq/close-buffers.vim'
 "Plug 'ycm-core/YouCompleteMe'
 "Plug 'gaalcaras/ncm-R'
 
-Plug '~/repos/vim_plugins/firstplugin'
-Plug '~/.vim/plugged/line_spacing'
+"Plug '~/repos/vim_plugins/firstplugin'
+"Plug '~/.vim/plugged/line_spacing'
 
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
+"Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
@@ -174,30 +176,30 @@ filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
 "#### Custom functions ####
-function! Smart_TabComplete()
-  let line = getline('.')                         " current line
+"function! Smart_TabComplete()
+  "let line = getline('.')                         " current line
 
-  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-                                                  " of the cursor
-  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-  if (strlen(substr)==0)                          " nothing to match on empty string
-    return "\<space>\<space>\<space>\<space>"
-  endif
-  let has_period = match(substr, '\.') != -1      " position of period, if any
-  let has_slash = match(substr, '\/') != -1       " position of slash, if any
-  let has_at = match(substr, '[@]') != -1       " position of slash, if any
-  if (has_at)
-	return "\<C-x>\<C-k>"
-  elseif (!has_period && !has_slash)
-    return "\<C-X>\<C-P>"                         " existing text matching
-  elseif ( has_slash )
-    return "\<C-X>\<C-F>"                         " file matching
-  else
-	return "\<C-N>"                  "any completion
-	"return "\<C-X>\<C-O>" "Omnicompletion
+  "let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  """ of the cursor
+  "let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  "if (strlen(substr)==0)                          " nothing to match on empty string
+    "return "\<space>\<space>\<space>\<space>"
+  "endif
+  "let has_period = match(substr, '\.') != -1      " position of period, if any
+  "let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  "let has_at = match(substr, '[@]') != -1       " position of slash, if any
+  "if (has_at)
+        "return "\<C-x>\<C-k>"
+  "elseif (!has_period && !has_slash)
+    "return "\<C-X>\<C-P>"                         " existing text matching
+  "elseif ( has_slash )
+    "return "\<C-X>\<C-F>"                         " file matching
+  "else
+        "return "\<C-N>"                  "any completion
+        ""return "\<C-X>\<C-O>" "Omnicompletion
 
-  endif
-endfunction
+  "endif
+"endfunction
 
 function! Source_RScript()
     let filepath = expand("%:p")"
@@ -225,7 +227,38 @@ let mapleader = ','
 "nnoremap <C-S-`> :tabprevious<cr>
 "nnoremap <C-q> :tabnext<cr>
 imap <C-S-i> <C-x><C-k>
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+"inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+"path completion with tab:
+"inoremap <tab> <C-X><C-F>
+"inoremap <tab> <C-N>
+
+" use <tab> for trigger completion and navigate to the next complete item
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
+
+"inoremap <silent><expr> <Tab>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<Tab>" :
+      "\ coc#refresh()
+
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+"let g:coc_snippet_next = '<tab>'
+
+
+
 inoremap jj <ESC>
 map <C-h> <C-W>h
 map <C-j> <C-W>j
@@ -269,9 +302,13 @@ vnoremap <C-S-a> :call NERDComment(0,"toggle")<CR>
 "nnoremap <C-p> :call fzf#run({'source': 'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R"', 
             "\ 'sink':  'edit'})
 
-nnoremap <C-p> :call fzf#run(fzf#wrap({ 'source': 'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R" -printf "%T@ %Tc %p\n" -o -name "*.sh" -type f -printf "%T@ %Tc %p\n" -o -name "*.py" -type f -printf "%T@ %Tc %p\n" \| sort -r', 'sink': 'e'}))<enter>
+nnoremap <C-p> :call fzf#run(fzf#wrap({ 'source': 
+            \'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R" -printf "%T@ %Tc %p\n" -o -name "*.sh" -type f -printf "%T@ %Tc %p\n" -o -name "*.py" -type f -printf "%T@ %Tc %p\n" \| sort -r \| tr -s " " \| cut -d " " -f 7', 
+            \'sink': 'tabedit',
+            \}))<enter>
 
 
+            "\'options': '--preview'
 "toggle numbering
 noremap <leader>5 :set invnumber invrelativenumber<CR>
 
@@ -330,3 +367,7 @@ map ]q :cn<CR>
 "nnoremap <leader>p ipl(<enter><enter>, 12, 12, <C-R>=expand("%:t") <esc>
 nnoremap <leader>fn i<C-R>=expand("%:t")<esc>
 
+
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
