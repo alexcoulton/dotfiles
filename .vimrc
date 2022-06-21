@@ -92,7 +92,7 @@ Plug 'majutsushi/tagbar'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 "Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
@@ -176,30 +176,30 @@ filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
 "#### Custom functions ####
-"function! Smart_TabComplete()
-  "let line = getline('.')                         " current line
+function! Smart_TabComplete()
+  let line = getline('.')                         " current line
 
-  "let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-                                                  """ of the cursor
-  "let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-  "if (strlen(substr)==0)                          " nothing to match on empty string
-    "return "\<space>\<space>\<space>\<space>"
-  "endif
-  "let has_period = match(substr, '\.') != -1      " position of period, if any
-  "let has_slash = match(substr, '\/') != -1       " position of slash, if any
-  "let has_at = match(substr, '[@]') != -1       " position of slash, if any
-  "if (has_at)
-        "return "\<C-x>\<C-k>"
-  "elseif (!has_period && !has_slash)
-    "return "\<C-X>\<C-P>"                         " existing text matching
-  "elseif ( has_slash )
-    "return "\<C-X>\<C-F>"                         " file matching
-  "else
-        "return "\<C-N>"                  "any completion
-        ""return "\<C-X>\<C-O>" "Omnicompletion
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  "" of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<space>\<space>\<space>\<space>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  let has_at = match(substr, '[@]') != -1       " position of slash, if any
+  if (has_at)
+        return "\<C-x>\<C-k>"
+  elseif (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+        return "\<C-N>"                  "any completion
+        return "\<C-X>\<C-O>" "Omnicompletion
 
-  "endif
-"endfunction
+  endif
+endfunction
 
 function! Source_RScript()
     let filepath = expand("%:p")"
@@ -241,19 +241,18 @@ imap <C-S-i> <C-x><C-k>
 "inoremap <silent><expr> <Tab>
       "\ pumvisible() ? "\<C-n>" :
       "\ <SID>check_back_space() ? "\<Tab>" :
-      "\ coc#refresh()
+      "\ coc#refresh() 
 
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+      \ coc#refresh() 
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
 "let g:coc_snippet_next = '<tab>'
 
@@ -367,7 +366,17 @@ map ]q :cn<CR>
 "nnoremap <leader>p ipl(<enter><enter>, 12, 12, <C-R>=expand("%:t") <esc>
 nnoremap <leader>fn i<C-R>=expand("%:t")<esc>
 
-
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"
+"
+"
+"Search only in open folds
+"https://vim.fandom.com/wiki/Search_only_in_unfolded_text
+set fdo-=search
+
+
+nnoremap <leader>v <c-v>
+"autocmd InsertLeave,WinEnter * setlocal foldmethod=syntax
+"autocmd InsertEnter,WinLeave * setlocal foldmethod=manual
