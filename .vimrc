@@ -269,7 +269,9 @@ vnoremap <C-S-a> :call NERDComment(0,"toggle")<CR>
 "nnoremap <C-p> :call fzf#run({'source': 'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R"', 
             "\ 'sink':  'edit'})
 
-nnoremap <C-p> :call fzf#run(fzf#wrap({ 'source': 'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R" -printf "%T@ %Tc %p\n" -o -name "*.sh" -type f -printf "%T@ %Tc %p\n" -o -name "*.py" -type f -printf "%T@ %Tc %p\n" \| sort -r', 'sink': 'e'}))<enter>
+nnoremap <C-p> :call fzf#run(fzf#wrap({ 'source': 
+            \'find ~/work/ucl/scripts/ ~/work/phd/ ~/renal_sequencing_pipeline/pipelines /camp/project/tracerX/working/PIPELINES/readOrientationBias_filtering_mutect2/v0.2 /camp/project/tracerX/working/Softwares/ABSOLUTEv1.0.6/R -type f -name "*.R" -printf "%T@ %Tc %p\n" -o -name "*.sh" -type f -printf "%T@ %Tc %p\n" -o -name "*.py" -type f -printf "%T@ %Tc %p\n" -o -name "README" -type f -printf "%T@ %Tc %p\n" \| sort -r \| tr -s " " \| cut -d " " -f 7', 
+            \'sink': 'tabedit'}))<enter>
 
 
 "toggle numbering
