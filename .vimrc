@@ -57,7 +57,7 @@ call plug#begin('~/.vim/plugged')
 
 "Unused
 "Plug 'vim-airline/vim-airline'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'vim-pandoc/vim-rmarkdown'
 "Plug 'yegappan/taglist'
 Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
@@ -227,34 +227,10 @@ let mapleader = ','
 "nnoremap <C-S-`> :tabprevious<cr>
 "nnoremap <C-q> :tabnext<cr>
 imap <C-S-i> <C-x><C-k>
-"inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 "path completion with tab:
 "inoremap <tab> <C-X><C-F>
 "inoremap <tab> <C-N>
-
-" use <tab> for trigger completion and navigate to the next complete item
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~ '\s'
-"endfunction
-
-"inoremap <silent><expr> <Tab>
-      "\ pumvisible() ? "\<C-n>" :
-      "\ <SID>check_back_space() ? "\<Tab>" :
-      "\ coc#refresh() 
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#refresh() 
-
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-
-"let g:coc_snippet_next = '<tab>'
 
 
 
@@ -321,7 +297,11 @@ noremap <leader>5 :set invnumber invrelativenumber<CR>
 nnoremap <PageUp> <C-U>
 nnoremap <PageDown> <C-D>
 nmap <leader>b yssbi
-nnoremap <leader>ff A %>% filter()<esc>ha
+nnoremap <leader>ff A %>%<CR>filter()<esc>ha
+nnoremap <leader>gg A %>%<CR>group_by()<esc>ha
+nnoremap <leader>mm A %>%<CR>mutate()<esc>ha
+nnoremap <leader>uu A %>%<CR>summarise()<esc>ha
+nnoremap <leader>aa A %>%<CR>arrange()<esc>ha
 
 nnoremap <leader>k ?^\S<enter>
 nnoremap <leader>j /^\S<enter>
@@ -380,3 +360,47 @@ set fdo-=search
 nnoremap <leader>v <c-v>
 "autocmd InsertLeave,WinEnter * setlocal foldmethod=syntax
 "autocmd InsertEnter,WinLeave * setlocal foldmethod=manual
+"
+"
+"coc settings
+"
+" use <tab> for trigger completion and navigate to the next complete item
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
+
+"inoremap <silent><expr> <Tab>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<Tab>" :
+      "\ coc#refresh() 
+
+"inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? coc#_select_confirm() :
+      "\ coc#refresh() 
+
+
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
+
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+"let g:coc_snippet_next = '<tab>'
+
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ CheckBackspace() ? "\<TAB>" :
+      "\ coc#refresh()
+
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
+"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+

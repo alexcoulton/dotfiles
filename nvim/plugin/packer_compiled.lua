@@ -89,11 +89,6 @@ _G.packer_plugins = {
     path = "/home/alex/.local/share/nvim/site/pack/packer/start/alpha-nvim",
     url = "https://github.com/goolord/alpha-nvim"
   },
-  ["bufferline.nvim"] = {
-    loaded = true,
-    path = "/home/alex/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
-    url = "https://github.com/akinsho/bufferline.nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/alex/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -158,6 +153,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/alex/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["lightline.vim"] = {
+    loaded = true,
+    path = "/home/alex/.local/share/nvim/site/pack/packer/start/lightline.vim",
+    url = "https://github.com/itchyny/lightline.vim"
   },
   ["lualine.nvim"] = {
     loaded = true,

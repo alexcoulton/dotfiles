@@ -30,8 +30,8 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", ":tabnext<CR>", opts)
+keymap("n", "<S-h>", ":tabprev<CR>", opts)
 
 -- Clear highlights
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
@@ -87,25 +87,3 @@ keymap("n", "<leader>n", ":tabnew<CR>", opts)
 keymap("n", "<leader>s", ":w<CR>", opts)
 --keymap("n", "<leader>q", ":q<CR>", opts)
 keymap("n", "<leader>t", ":NvimTreeToggle<CR>")
-
-local result = vim.api.nvim_exec(
-[[
-
-let g:slime_target = "tmux"
-let g:slime_paste_file = "$HOME/.slime_paste"
-
-nnoremap <leader>k ?^\S<enter>
-nnoremap <leader>j /^\S<enter>
-vnoremap <leader>k ?^\S<enter>
-vnoremap <leader>j /^\S<enter>
-
-nmap <leader>b yssbi
-nmap <space> <S-v><C-c><C-c>
-vmap <space> <C-c><C-c>
-
-colorscheme gruvbox
-
-]],
-true)
-
-
