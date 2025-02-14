@@ -57,7 +57,7 @@ call plug#begin('~/.vim/plugged')
 
 "Unused
 "Plug 'vim-airline/vim-airline'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'vim-pandoc/vim-rmarkdown'
 "Plug 'yegappan/taglist'
 Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
@@ -227,7 +227,7 @@ let mapleader = ','
 "nnoremap <C-S-`> :tabprevious<cr>
 "nnoremap <C-q> :tabnext<cr>
 imap <C-S-i> <C-x><C-k>
-"inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 "path completion with tab:
 "inoremap <tab> <C-X><C-F>
 "inoremap <tab> <C-N>
@@ -243,11 +243,11 @@ imap <C-S-i> <C-x><C-k>
       "\ <SID>check_back_space() ? "\<Tab>" :
       "\ coc#refresh() 
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+"inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#refresh() 
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? coc#_select_confirm() :
+      "\ coc#refresh() 
 
 "function! s:check_back_space() abort
   "let col = col('.') - 1
@@ -307,10 +307,10 @@ nnoremap <C-p> :call fzf#run(fzf#wrap({ 'source':
             \'sink': 'tabedit'}))<enter>
 "
 "camp version
-nnoremap <C-p> :call fzf#run(fzf#wrap({ 'source': 
-            \'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R" -printf "%T@ %Tc %p\n" -o -name "*.sh" -type f -printf "%T@ %Tc %p\n" -o -name "*.py" -type f -printf "%T@ %Tc %p\n" \| sort -r \| tr -s " " \| cut -d " " -f 7', 
-            \'sink': 'tabedit',
-            \}))<enter>
+"nnoremap <C-p> :call fzf#run(fzf#wrap({ 'source': 
+            "\'find ~/work/ucl/scripts/ ~/work/phd/ -type f -name "*.R" -printf "%T@ %Tc %p\n" -o -name "*.sh" -type f -printf "%T@ %Tc %p\n" -o -name "*.py" -type f -printf "%T@ %Tc %p\n" \| sort -r \| tr -s " " \| cut -d " " -f 7', 
+            "\'sink': 'tabedit',
+            "\}))<enter>
 
 
             "\'options': '--preview'
@@ -327,7 +327,11 @@ noremap <leader>5 :set invnumber invrelativenumber<CR>
 nnoremap <PageUp> <C-U>
 nnoremap <PageDown> <C-D>
 nmap <leader>b yssbi
-nnoremap <leader>ff A %>% filter()<esc>ha
+nnoremap <leader>ff A %>%<CR>filter()<esc>ha
+nnoremap <leader>gg A %>%<CR>group_by()<esc>ha
+nnoremap <leader>mm A %>%<CR>mutate()<esc>ha
+nnoremap <leader>uu A %>%<CR>summarise()<esc>ha
+nnoremap <leader>aa A %>%<CR>arrange()<esc>ha
 
 nnoremap <leader>k ?^\S<enter>
 nnoremap <leader>j /^\S<enter>
