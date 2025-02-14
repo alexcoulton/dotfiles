@@ -232,6 +232,7 @@ inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 "inoremap <tab> <C-X><C-F>
 "inoremap <tab> <C-N>
 
+<<<<<<< HEAD
 " use <tab> for trigger completion and navigate to the next complete item
 "function! s:check_back_space() abort
   "let col = col('.') - 1
@@ -256,6 +257,8 @@ inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
 "let g:coc_snippet_next = '<tab>'
 
+=======
+>>>>>>> 8565da5a819374a8203ec61c4a6ae0b0d33abe8a
 
 
 inoremap jj <ESC>
@@ -390,3 +393,47 @@ set fdo-=search
 nnoremap <leader>v <c-v>
 "autocmd InsertLeave,WinEnter * setlocal foldmethod=syntax
 "autocmd InsertEnter,WinLeave * setlocal foldmethod=manual
+"
+"
+"coc settings
+"
+" use <tab> for trigger completion and navigate to the next complete item
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
+
+"inoremap <silent><expr> <Tab>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<Tab>" :
+      "\ coc#refresh() 
+
+"inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? coc#_select_confirm() :
+      "\ coc#refresh() 
+
+
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
+
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+"let g:coc_snippet_next = '<tab>'
+
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ CheckBackspace() ? "\<TAB>" :
+      "\ coc#refresh()
+
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
+"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+
