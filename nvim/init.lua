@@ -1,6 +1,6 @@
 local version = vim.version()
 if version.major ~= 0 or version.minor ~= 12 or version.patch ~= 4 then
-  error("nvim-modern requires Neovim 0.12.4 exactly")
+  error("This configuration requires Neovim 0.12.4 exactly")
 end
 
 vim.g.mapleader = ","

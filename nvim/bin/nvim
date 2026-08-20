@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+nvim_bin="${NVIM_BIN:-$HOME/.local/opt/nvim-0.12.4/bin/nvim}"
+
+if [ ! -x "$nvim_bin" ]; then
+  printf 'nvim: Neovim 0.12.4 not found at %s\n' "$nvim_bin" >&2
+  printf 'Set NVIM_BIN to the Neovim 0.12.4 executable.\n' >&2
+  exit 1
+fi
+
+exec "$nvim_bin" "$@"

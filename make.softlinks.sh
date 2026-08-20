@@ -21,5 +21,5 @@ link_dotfile() {
 link_dotfile "$dotfiles_dir/.vimrc" "$HOME/.vimrc"
 link_dotfile "$dotfiles_dir/.tmux.conf" "$HOME/.tmux.conf"
 link_dotfile "$dotfiles_dir/.ctags" "$HOME/.ctags"
-link_dotfile "$dotfiles_dir/nvim-modern" "$HOME/.config/nvim-modern"
-link_dotfile "$dotfiles_dir/nvim-modern/bin/nvim-modern" "$HOME/.local/bin/nvim-modern"
+link_dotfile "$dotfiles_dir/nvim" "$HOME/.config/nvim"
+link_dotfile "$dotfiles_dir/nvim/bin/nvim" "$HOME/.local/bin/nvim"

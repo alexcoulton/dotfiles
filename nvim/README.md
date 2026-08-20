@@ -1,8 +1,7 @@
-# nvim-modern
+# Neovim
 
-An isolated, reproducible Neovim 0.12.4 profile. It reproduces the effective
-behaviour of `~/.config/nvim` without sharing its configuration, plugins,
-state, cache, or undo history.
+A reproducible Neovim 0.12.4 configuration based on the effective behaviour of
+the previous setup.
 
 ## What is pinned
 
@@ -63,22 +62,16 @@ git clone https://github.com/alexcoulton/dotfiles.git ~/dotfiles
 ~/dotfiles/make.softlinks.sh
 ```
 
-This links `~/dotfiles/nvim-modern` to `~/.config/nvim-modern` and installs the
-`nvim-modern` launcher in `~/.local/bin`. Existing real files or directories
-are left untouched and reported by the script.
+This links `~/dotfiles/nvim` to `~/.config/nvim` and installs the pinned `nvim`
+launcher in `~/.local/bin`. Existing real files or directories are left
+untouched and reported by the script. Move an existing `~/.config/nvim`
+directory aside before running it if this configuration should replace it.
 
 Make sure `~/.local/bin` is on `PATH`, activate the R environment, and start:
 
 ```sh
 conda activate macsima-stitch-local
-nvim-modern
-```
-
-To make this profile the default interactive `nvim` command, add the following
-to `~/.bash_profile` or `~/.zshrc`:
-
-```sh
-alias nvim='nvim-modern'
+nvim
 ```
 
 Allow the first installation to finish. To explicitly restore every locked
@@ -106,19 +99,20 @@ Tree-sitter parser revisions move only when the locked nvim-treesitter commit
 moves. After such an update, run `:TSUpdate`, test highlighting and folding,
 and commit the new `lazy-lock.json`.
 
-## Isolation
+## Runtime paths
 
-The launcher sets `NVIM_APPNAME=nvim-modern`, giving the profile its own:
+This configuration uses Neovim's standard application paths:
 
-- config: `~/.config/nvim-modern`
-- data and plugins: `~/.local/share/nvim-modern`
-- state: `~/.local/state/nvim-modern`
-- cache: `~/.cache/nvim-modern`
+- config: `~/.config/nvim`
+- data and plugins: `~/.local/share/nvim`
+- state: `~/.local/state/nvim`
+- cache: `~/.cache/nvim`
 
-The existing `nvim` command and `~/.config/nvim` are not used or modified.
+When migrating, archive any legacy runtime directories you do not want the new
+configuration to reuse.
 
-Set `NVIM_MODERN_NVIM` if the pinned executable is installed somewhere other
-than `~/.local/opt/nvim-0.12.4/bin/nvim`.
+Set `NVIM_BIN` if the pinned executable is installed somewhere other than
+`~/.local/opt/nvim-0.12.4/bin/nvim`.
 
 ## REPL workflow
 
@@ -130,8 +124,7 @@ vim-slime targets tmux. The first send in a buffer prompts for the tmux pane.
 - `<C-c>v` or `:SlimeConfig`: configure the target pane
 - Python buffers: bracketed paste enabled
 
-The temporary paste file remains isolated at
-`~/.cache/nvim-modern/slime_paste`.
+The temporary paste file is stored at `~/.cache/nvim/slime_paste`.
 
 ## Inspection
 
